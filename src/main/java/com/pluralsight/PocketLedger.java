@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -24,7 +21,28 @@ public class PocketLedger {
 
             switch (homeChoice){
                 case "D", "d" -> {
-                    System.out.println("Deposit");
+                    try {
+                        BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv",true)); // true for appending
+                        System.out.print("Date (YYYY-MM-DD): ");
+                        String date = userInput.nextLine();
+                        System.out.print("Enter Time (HH:MM:SS): ");
+                        String time = userInput.nextLine();
+                        System.out.print("Description: ");
+                        String description = userInput.nextLine();
+                        System.out.print("Vendor: ");
+                        String vendor = userInput.nextLine();
+                        System.out.print("Amount:");
+                        double amount = userInput.nextDouble();
+                        userInput.nextLine();
+
+                        bw.newLine();
+                        bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
+
+                        bw.close();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case "P", "p" -> {
@@ -129,7 +147,7 @@ public class PocketLedger {
 
             }
             case 0 -> {
-                break; // Needs updating to return to ledger menu
+                 // Needs updating to return to ledger menu
 
             }
             default -> {
@@ -142,5 +160,7 @@ public class PocketLedger {
     public static BufferedReader getReader() throws FileNotFoundException {
         return new BufferedReader (new FileReader("src/main/resources/transactions.csv"));
     }
+    // file Writer method
+
 
 }
