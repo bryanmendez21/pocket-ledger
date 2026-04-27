@@ -1,5 +1,9 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -48,35 +52,84 @@ public class PocketLedger {
 
     }
 
-    // Menu Methods
+    // Menu Method Ledger
     public static void ledgerMenu(){
-        System.out.println("---------- Ledger Menu ----------");
-        System.out.println("A) Display All");
-        System.out.println("D) Deposits");
-        System.out.println("P) Payments");
-        System.out.println("R) Reports");
-        System.out.println("H) Home");
+        try(BufferedReader tranFile = getReader()) { // auto closes
+            System.out.println("---------- Ledger Menu ----------");
+            System.out.println("A) Display All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments");
+            System.out.println("R) Reports");
+            System.out.println("H) Home");
+            System.out.print("Choose Option Using Letters: ");
+            String ledgerChoice = userInput.nextLine();
+            switch (ledgerChoice) {
+                case "A", "a" -> {
+                    System.out.println("Display all");
+                    break;
+                }
+                case "D", "d" -> {
+                    System.out.println("view deposits");
+                    break;
+                }
+                case "P", "p" -> {
+                    System.out.println(" view payments");
+                    break;
+                }
+                case "R", "r" -> {
+                    reportMenu();
+                    break;
+                }
+                case "H", "h" -> {
+                    return; // exits method and returns main menu
+
+                }
+                default -> {
+                    System.out.println("Invalid Input");
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Menu Method Report
+    public static void reportMenu() {
+        System.out.println("---------- Report Menu ----------");
+        System.out.println("1) Month To Date");
+        System.out.println("2) Previous Month");
+        System.out.println("3) Year To Date");
+        System.out.println("4) Previous Year");
+        System.out.println("5) Search by Vendor");
+        System.out.println("0) Back");
         System.out.print("Choose Option Using Letters: ");
-        String ledgerChoice = userInput.nextLine();
-        switch (ledgerChoice){
-            case "A","a" ->{
+        int reportChoice = userInput.nextInt();
+        userInput.nextLine();
+        switch (reportChoice) {
+            case 1 -> {
                 System.out.println("Display all");
                 break;
             }
-            case "D","d" ->{
+            case 2 -> {
                 System.out.println("view deposits");
                 break;
             }
-            case "P","p" ->{
+            case 3 -> {
                 System.out.println(" view payments");
                 break;
             }
-            case "R","r" ->{
+            case 4 -> {
                 System.out.println("reports");
                 break;
             }
-            case "H","h" ->{
-                return; // exits method and returns main menu
+            case 5 -> {
+                System.out.println("Vendor Name:");
+                String vendorName = userInput.nextLine();
+
+            }
+            case 0 -> {
+                break; // Needs updating to return to ledger menu
 
             }
             default -> {
@@ -84,6 +137,10 @@ public class PocketLedger {
                 break;
             }
         }
+    }
+    // file Reader method
+    public static BufferedReader getReader() throws FileNotFoundException {
+        return new BufferedReader (new FileReader("src/main/resources/transactions.csv"));
     }
 
 }
