@@ -21,32 +21,12 @@ public class PocketLedger {
 
             switch (homeChoice){
                 case "D", "d" -> {
-                    try {
-                        BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv",true)); // true for appending
-                        System.out.print("Date (YYYY-MM-DD): ");
-                        String date = userInput.nextLine();
-                        System.out.print("Enter Time (HH:MM:SS): ");
-                        String time = userInput.nextLine();
-                        System.out.print("Description: ");
-                        String description = userInput.nextLine();
-                        System.out.print("Vendor: ");
-                        String vendor = userInput.nextLine();
-                        System.out.print("Amount:");
-                        double amount = userInput.nextDouble();
-                        userInput.nextLine();
-
-                        bw.newLine();
-                        bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
-
-                        bw.close();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    getWriter();
                     break;
                 }
                 case "P", "p" -> {
-                    System.out.println("Payment");
+                    System.out.println("Payment info");
+                    getWriter();
                     break;
                 }
                 case "L", "l" -> {
@@ -156,11 +136,33 @@ public class PocketLedger {
             }
         }
     }
-    // file Reader method
+    // File Reader Method
     public static BufferedReader getReader() throws FileNotFoundException {
         return new BufferedReader (new FileReader("src/main/resources/transactions.csv"));
     }
-    // file Writer method
+    // File Writer Method Deposits and Payments
+    public static void getWriter() {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv",true))) {
+            // true for appending
+            System.out.print("Date (YYYY-MM-DD): ");
+            String date = userInput.nextLine();
+            System.out.print("Enter Time (HH:MM:SS): ");
+            String time = userInput.nextLine();
+            System.out.print("Description: ");
+            String description = userInput.nextLine();
+            System.out.print("Vendor: ");
+            String vendor = userInput.nextLine();
+            System.out.print("Amount: ");
+            double amount = userInput.nextDouble();
+            userInput.nextLine();
+
+            bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
+            bw.newLine();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
