@@ -125,11 +125,26 @@ public class PocketLedger {
         int reportChoice = userInput.nextInt();
         userInput.nextLine();
 
-        LocalDate date = LocalDate.now();
+        LocalDate date = LocalDate.now(); // get today date
         ArrayList<Transactions> transactions = loadTransaction(); // get whole list
         switch (reportChoice) {
             case 1 -> {
-                System.out.println("view month to date");
+                int currentYear = LocalDate.now().getYear();
+                int currentMonth = LocalDate.now().getMonthValue();
+                int currentDay = LocalDate.now().getDayOfMonth();
+
+                System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                for (Transactions t : transactions) { // iterate through list
+
+                    String[] dateSplit = t.getDate().split(Pattern.quote("-"));
+
+                    int year = Integer.parseInt(dateSplit[0]);
+                    int month = Integer.parseInt(dateSplit[1]);
+                    int day = Integer.parseInt(dateSplit[2]);
+                    if (month == currentMonth) {
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
+                    }
+                }
                 break;
             }
             case 2 -> {
