@@ -1,5 +1,11 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 public class Transactions {
 
     // Attributes
@@ -62,5 +68,34 @@ public class Transactions {
         this.amount = amount;
     }
 
+
+
+
+    // All Transaction Method
+    public static ArrayList<Transactions> loadTransaction() {
+        ArrayList<Transactions> transaction = new ArrayList<>();
+
+            try (BufferedReader tranFile = FileManager.getReader()){
+
+                String fileData;
+                tranFile.readLine(); // Skip Header
+                while ((fileData = tranFile.readLine()) != null) {
+                    String[] splitData = fileData.split(Pattern.quote("|"));
+                    //split
+                    String date = splitData[0];
+                    String time = splitData[1];
+                    String description = splitData[2];
+                    String vendor = splitData[3];
+                    double amount = Double.parseDouble(splitData[4]);
+
+                    //System.out.printf("%s | %s | %s | %s | %.2f\n", date, time, vendor, description, amount);
+                    transaction.add(new Transactions(date, time, description, vendor, amount));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return transaction;
+    }
 
 }

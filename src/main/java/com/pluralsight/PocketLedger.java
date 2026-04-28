@@ -24,17 +24,17 @@ public class PocketLedger {
 
             switch (homeChoice){
                 case "D", "d" -> {
-                    getWriter();
+                    FileManager.getWriter();
                     break;
                 }
                 case "P", "p" -> {
                     System.out.println("Payment info");
-                    getWriter(); // change this so negative number gets added
+                    FileManager.getWriter(); // change this so negative number gets added
                     break;
                 }
                 case "L", "l" -> {
-                   ledgerMenu();
-                   break;
+                    LedgerMenu.ledgerMenu();
+                    break;
                 }
                 case "X", "x" ->{
                     running = false;
@@ -53,7 +53,7 @@ public class PocketLedger {
 
     }
 
-    // Menu Method Ledger
+/*    // Menu Method Ledger
     public static void ledgerMenu(){
         try(BufferedReader tranFile = getReader()) { // auto closes Reader
             System.out.println("---------- Ledger Menu ----------");
@@ -236,7 +236,7 @@ public class PocketLedger {
         }
     }
     // File Reader Method
-   public static BufferedReader getReader() throws FileNotFoundException {
+   public BufferedReader getReader() throws FileNotFoundException {
        return new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
    }
 
@@ -291,7 +291,7 @@ public class PocketLedger {
         return transaction;
     }
 
-    /*// Transaction Method for Desposits and Payment
+    // Transaction Method for Desposits and Payment
     if (t.getamount() > 0{
     print positive values
     }else-if (t.getamount< 0{
