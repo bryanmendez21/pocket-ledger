@@ -74,14 +74,23 @@ public class PocketLedger {
                     break;
                 }
                 case "D", "d" -> {
+                    System.out.println("---------- DEPOSITS ----------");
                     System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
                     for (Transactions t : transactions) { // iterate through list
-                        if
+                        if(t.getAmount() > 0){
+                            System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                        }
                     }
                     break;
                 }
                 case "P", "p" -> {
-                    System.out.println(" view payments");
+                    System.out.println("---------- PAYMENTS ----------");
+                    System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                    for (Transactions t : transactions) { // iterate through list
+                        if(t.getAmount() < 0){
+                            System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                        }
+                    }
                     break;
                 }
                 case "R", "r" -> {
