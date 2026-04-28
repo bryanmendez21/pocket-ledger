@@ -129,6 +129,7 @@ public class PocketLedger {
         ArrayList<Transactions> transactions = loadTransaction(); // get whole list
         switch (reportChoice) {
             case 1 -> {
+                System.out.println("---- view current month ----");
                 int currentYear = LocalDate.now().getYear();
                 int currentMonth = LocalDate.now().getMonthValue();
                 int currentDay = LocalDate.now().getDayOfMonth();
@@ -141,6 +142,7 @@ public class PocketLedger {
                     int year = Integer.parseInt(dateSplit[0]);
                     int month = Integer.parseInt(dateSplit[1]);
                     int day = Integer.parseInt(dateSplit[2]);
+
                     if (month == currentMonth) {
                         System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
                     }
@@ -148,10 +150,28 @@ public class PocketLedger {
                 break;
             }
             case 2 -> {
-                System.out.println("view previous month");
+                System.out.println("---- view previous month ----");
+                int currentYear = LocalDate.now().getYear();
+                int currentMonth = LocalDate.now().getMonthValue();
+                int currentDay = LocalDate.now().getDayOfMonth();
+
+                System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                for (Transactions t : transactions) { // iterate through list
+
+                    String[] dateSplit = t.getDate().split(Pattern.quote("-"));
+
+                    int year = Integer.parseInt(dateSplit[0]);
+                    int month = Integer.parseInt(dateSplit[1]);
+                    int day = Integer.parseInt(dateSplit[2]);
+
+                    if (month == currentMonth -1 ) {
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
+                    }
+                }
                 break;
             }
             case 3 -> {
+                System.out.println("---- View Current Year ----");
                 int currentYear = LocalDate.now().getYear();
                 int currentMonth = LocalDate.now().getMonthValue();
                 int currentDay = LocalDate.now().getDayOfMonth();
@@ -172,13 +192,31 @@ public class PocketLedger {
                 break;
             }
             case 4 -> {
-                System.out.println("previous year");
+                System.out.println("---- View Previous Year ----");
+                int currentYear = LocalDate.now().getYear();
+                int currentMonth = LocalDate.now().getMonthValue();
+                int currentDay = LocalDate.now().getDayOfMonth();
+
+                System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                for (Transactions t : transactions) { // iterate through list
+
+                    String [] dateSplit = t.getDate().split(Pattern.quote("-"));
+
+                    int year = Integer.parseInt(dateSplit[0]);
+                    int month = Integer.parseInt(dateSplit[1]);
+                    int day = Integer.parseInt(dateSplit[2]);
+
+                    if (year == currentYear -1) {
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                    }
+                }
                 break;
             }
             case 5 -> {
                 System.out.print("Vendor Name: ");
                 String vendorName = userInput.nextLine();
 
+                System.out.println("---- View By Vendor ----");
                 System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
                 for (Transactions t : transactions) { // iterate through list
                     if(t.getVendor().equalsIgnoreCase(vendorName)){
@@ -253,8 +291,16 @@ public class PocketLedger {
         return transaction;
     }
 
-    // Transaction Method for Desposits and Payment
+    /*// Transaction Method for Desposits and Payment
+    if (t.getamount() > 0{
+    print positive values
+    }else-if (t.getamount< 0{
+    print negative values
+    }else{
+    print all
+    }
+    */
 
-    // Parse Date
+
 
 }
