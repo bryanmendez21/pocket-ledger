@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -124,6 +125,7 @@ public class PocketLedger {
         int reportChoice = userInput.nextInt();
         userInput.nextLine();
 
+        LocalDate date = LocalDate.now();
         ArrayList<Transactions> transactions = loadTransaction(); // get whole list
         switch (reportChoice) {
             case 1 -> {
@@ -135,7 +137,23 @@ public class PocketLedger {
                 break;
             }
             case 3 -> {
-                System.out.println(" view year to date");
+                int currentYear = LocalDate.now().getYear();
+                int currentMonth = LocalDate.now().getMonthValue();
+                int currentDay = LocalDate.now().getDayOfMonth();
+
+                System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                for (Transactions t : transactions) { // iterate through list
+
+                    String [] dateSplit = t.getDate().split(Pattern.quote("-"));
+
+                    int year = Integer.parseInt(dateSplit[0]);
+                    int month = Integer.parseInt(dateSplit[1]);
+                    int day = Integer.parseInt(dateSplit[2]);
+
+                    if (year == currentYear) {
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                    }
+                }
                 break;
             }
             case 4 -> {
@@ -222,6 +240,6 @@ public class PocketLedger {
 
     // Transaction Method for Desposits and Payment
 
-    //
+    // Parse Date
 
 }
