@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.*;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class PocketLedger {
     static  Scanner userInput = new Scanner(System.in); // shared across entire class
@@ -52,7 +53,7 @@ public class PocketLedger {
 
     // Menu Method Ledger
     public static void ledgerMenu(){
-        try(BufferedReader tranFile = getReader()) { // auto closes
+        try(BufferedReader tranFile = getReader()) { // auto closes Reader
             System.out.println("---------- Ledger Menu ----------");
             System.out.println("A) Display All");
             System.out.println("D) Deposits");
@@ -63,7 +64,20 @@ public class PocketLedger {
             String ledgerChoice = userInput.nextLine();
             switch (ledgerChoice) {
                 case "A", "a" -> {
-                    System.out.println("Display all");
+                    System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                       String fileData;
+                       tranFile.readLine();
+                       while ((fileData = tranFile.readLine()) != null){
+                           String [] splitData = fileData.split(Pattern.quote("|"));
+                           String date = splitData[0];
+                           String time = splitData[1];
+                           String description = splitData[2];
+                           String vendor = splitData[3];
+                           double amount = Double.parseDouble(splitData[4]);
+
+                           System.out.printf("%s | %s | %s | %s | %.2f\n",date,time,vendor,description,amount);
+                       }
+
                     break;
                 }
                 case "D", "d" -> {
@@ -106,7 +120,7 @@ public class PocketLedger {
         userInput.nextLine();
         switch (reportChoice) {
             case 1 -> {
-                System.out.println("Display all");
+
                 break;
             }
             case 2 -> {
@@ -137,9 +151,10 @@ public class PocketLedger {
         }
     }
     // File Reader Method
-    public static BufferedReader getReader() throws FileNotFoundException {
-        return new BufferedReader (new FileReader("src/main/resources/transactions.csv"));
-    }
+   public static BufferedReader getReader() throws FileNotFoundException {
+       return new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
+   }
+
     // File Writer Method Deposits and Payments
     public static void getWriter() {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv",true))) {
@@ -163,6 +178,9 @@ public class PocketLedger {
             e.printStackTrace();
         }
     }
+
+    // Transaction
+
 
 
 }
