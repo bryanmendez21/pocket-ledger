@@ -28,7 +28,7 @@ public class PocketLedger {
                 }
                 case "P", "p" -> {
                     System.out.println("Payment info");
-                    getWriter();
+                    getWriter(); // change this so negative number gets added
                     break;
                 }
                 case "L", "l" -> {
@@ -73,7 +73,7 @@ public class PocketLedger {
                     }
                     break;
                 }
-                case "D", "d" -> {
+                case "D", "d" -> { // move a,d,p into one method and call based on whats needed
                     System.out.println("---------- DEPOSITS ----------");
                     System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
                     for (Transactions t : transactions) { // iterate through list
@@ -123,26 +123,35 @@ public class PocketLedger {
         System.out.print("Choose Option Using Letters: ");
         int reportChoice = userInput.nextInt();
         userInput.nextLine();
+
+        ArrayList<Transactions> transactions = loadTransaction(); // get whole list
         switch (reportChoice) {
             case 1 -> {
-
+                System.out.println("view month to date");
                 break;
             }
             case 2 -> {
-                System.out.println("view deposits");
+                System.out.println("view previous month");
                 break;
             }
             case 3 -> {
-                System.out.println(" view payments");
+                System.out.println(" view year to date");
                 break;
             }
             case 4 -> {
-                System.out.println("reports");
+                System.out.println("previous year");
                 break;
             }
             case 5 -> {
-                System.out.println("Vendor Name:");
+                System.out.print("Vendor Name: ");
                 String vendorName = userInput.nextLine();
+
+                System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                for (Transactions t : transactions) { // iterate through list
+                    if(t.getVendor().equalsIgnoreCase(vendorName)){
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                    }
+                }
 
             }
             case 0 -> {
@@ -211,9 +220,8 @@ public class PocketLedger {
         return transaction;
     }
 
-    // Deposit and Payment method
+    // Transaction Method for Desposits and Payment
 
-
-
+    //
 
 }
