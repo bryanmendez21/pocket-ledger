@@ -58,7 +58,7 @@ public class ReportMenu {
                     int month = Integer.parseInt(dateSplit[1]);
                     int day = Integer.parseInt(dateSplit[2]);
 
-                    if (month == currentMonth -1 ) {
+                    if (month == currentMonth -1 && year == currentYear) {
                         System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
                     }
                 }
