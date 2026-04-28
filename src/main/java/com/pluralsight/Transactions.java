@@ -3,11 +3,11 @@ package com.pluralsight;
 public class Transactions {
 
     // Attributes
-    String date;
-    String time;
-    String description;
-    String vendor;
-    double amount;
+    private String date;
+    private String time;
+    private String description;
+    private String vendor;
+    private double amount;
 
     //Constructor
     public Transactions(String date, String time, String description, String vendor, double amount) {

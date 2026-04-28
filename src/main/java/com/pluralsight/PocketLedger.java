@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class PocketLedger {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
             System.out.print("Choose Option Using Letters: ");
-            String homeChoice = userInput.nextLine();
+            String homeChoice = userInput.nextLine(); //.lowercase
 
             switch (homeChoice){
                 case "D", "d" -> {
@@ -62,26 +63,21 @@ public class PocketLedger {
             System.out.println("H) Home");
             System.out.print("Choose Option Using Letters: ");
             String ledgerChoice = userInput.nextLine();
+
+            ArrayList<Transactions> transactions = loadTransaction(); // get whole list
             switch (ledgerChoice) {
                 case "A", "a" -> {
                     System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                       String fileData;
-                       tranFile.readLine();
-                       while ((fileData = tranFile.readLine()) != null){
-                           String [] splitData = fileData.split(Pattern.quote("|"));
-                           String date = splitData[0];
-                           String time = splitData[1];
-                           String description = splitData[2];
-                           String vendor = splitData[3];
-                           double amount = Double.parseDouble(splitData[4]);
-
-                           System.out.printf("%s | %s | %s | %s | %.2f\n",date,time,vendor,description,amount);
-                       }
-
+                    for (Transactions t : transactions) { // iterate through list
+                        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                    }
                     break;
                 }
                 case "D", "d" -> {
-                    System.out.println("view deposits");
+                    System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+                    for (Transactions t : transactions) { // iterate through list
+                        if
+                    }
                     break;
                 }
                 case "P", "p" -> {
@@ -179,7 +175,35 @@ public class PocketLedger {
         }
     }
 
-    // Transaction
+    // All Transaction Method
+    public static ArrayList<Transactions> loadTransaction() {
+        ArrayList<Transactions> transaction = new ArrayList<>();
+
+        try (BufferedReader tranFile = getReader()) {
+
+            String fileData;
+            tranFile.readLine(); // Skip Header
+            while ((fileData = tranFile.readLine()) != null) {
+                String[] splitData = fileData.split(Pattern.quote("|"));
+                //split
+                String date = splitData[0];
+                String time = splitData[1];
+                String description = splitData[2];
+                String vendor = splitData[3];
+                double amount = Double.parseDouble(splitData[4]);
+
+                //System.out.printf("%s | %s | %s | %s | %.2f\n", date, time, vendor, description, amount);
+                transaction.add(new Transactions(date,time,description,vendor,amount));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
+
+    // Deposit and Payment method
+
 
 
 
