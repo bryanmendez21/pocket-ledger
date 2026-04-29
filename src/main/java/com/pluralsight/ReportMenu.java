@@ -16,6 +16,7 @@ public class ReportMenu {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
+            System.out.println("6) Custom Search");
             System.out.println("0) Back");
             System.out.print("Choose Option Using Letters: ");
             int reportChoice = PocketLedger.userInput.nextInt();
@@ -50,7 +51,16 @@ public class ReportMenu {
                     reportSearchOptions(reportChoice, vendorName);
                 }
                 case 6 -> {
-                    System.out.println("Custom Search ");
+                    System.out.println("---- Custom Search ----");
+                    System.out.println("S) Filter by Start/End date");
+                    System.out.println("A) Filter by Amount");
+                    System.out.println("D) Filter by Description");
+
+                    System.out.println("Search using: ");
+                    String customChoice = PocketLedger.userInput.nextLine().toUpperCase();
+
+                    customSearch(customChoice);
+
                     break;
                 }
                 case 0 -> reportRunning = false;
@@ -96,8 +106,27 @@ public class ReportMenu {
                 FileManager.printRow(t);
 
             }
-        }
 
+        }
+    }
+
+    // Custom Search Method
+    public static void customSearch(String customChoice){
+        switch(customChoice) {
+            case "S" ->{
+                System.out.println("start end");
+               break;
+            }
+            case "A" -> {
+                System.out.println("Amount");
+                break;
+            }
+            case "D" -> {
+                System.out.println("Description");
+                break;
+            }
+            default -> System.out.println("Invalid Input");
+        }
     }
 }
 

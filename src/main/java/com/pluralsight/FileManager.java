@@ -41,6 +41,7 @@ public class FileManager {  // Handles All File Writing and Reading
     public static void printHeader(){
         System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
     }
+
     // print statement method
     public static void printRow(Transactions t){
         System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
