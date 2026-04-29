@@ -51,16 +51,24 @@ public class ReportMenu {
                     reportSearchOptions(reportChoice, vendorName);
                 }
                 case 6 -> {
-                    System.out.println("---- Custom Search ----");
-                    System.out.println("S) Filter by Start/End date");
-                    System.out.println("A) Filter by Amount");
-                    System.out.println("D) Filter by Description");
+                    boolean customRunning = true;
+                    do {
+                        System.out.println("---- Custom Search ----");
+                        System.out.println("S) Filter by Start/End date");
+                        System.out.println("A) Filter by Amount");
+                        System.out.println("D) Filter by Description");
+                        System.out.println("X) Exit Custom Search");
 
-                    System.out.println("Search using: ");
-                    String customChoice = PocketLedger.userInput.nextLine().toUpperCase();
+                        System.out.println("Search using: ");
+                        String customChoice = PocketLedger.userInput.nextLine().toUpperCase();
 
-                    customSearch(customChoice);
+                        if(customChoice.equalsIgnoreCase("X")){
+                            customRunning = false;
+                        }else {
+                            customSearch(customChoice);
+                        }
 
+                    }while(customRunning);
                     break;
                 }
                 case 0 -> reportRunning = false;
