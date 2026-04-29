@@ -3,8 +3,8 @@ package com.pluralsight;
 import java.io.*;
 
 
-public class FileManager {
-    // Handles All File Writing and Reading
+public class FileManager {  // Handles All File Writing and Reading
+
     // File Reader Method
     public static BufferedReader getReader() throws FileNotFoundException {
         return new BufferedReader(new FileReader("src/main/resources/transactions.csv"));

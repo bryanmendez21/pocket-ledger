@@ -16,27 +16,27 @@ public class PocketLedger {
         do {
             System.out.println("---------- Welcome to Pocket Ledger ----------");
             System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment (Debit)");
+            System.out.println("P) Make Payment");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
             System.out.print("Choose Option Using Letters: ");
-            String homeChoice = userInput.nextLine(); //.lowercase
+            String homeChoice = userInput.nextLine().trim().toUpperCase(); //.lowercase
 
             switch (homeChoice){
-                case "D", "d" -> {
+                case "D" -> {
                     FileManager.getWriter();
                     break;
                 }
-                case "P", "p" -> {
+                case "P" -> {
                     System.out.println("Payment info");
                     FileManager.getWriter(); // change this so negative number gets added
                     break;
                 }
-                case "L", "l" -> {
+                case "L" -> {
                     LedgerMenu.ledgerMenu();
                     break;
                 }
-                case "X", "x" ->{
+                case "X" -> {
                     running = false;
                     continue;
                 }
