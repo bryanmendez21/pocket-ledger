@@ -88,7 +88,6 @@ public class Transactions {
                     String vendor = splitData[3];
                     double amount = Double.parseDouble(splitData[4]);
 
-                    //System.out.printf("%s | %s | %s | %s | %.2f\n", date, time, vendor, description, amount);
                     transaction.add(new Transactions(date, time, description, vendor, amount));
                 }
             } catch (IOException e) {
