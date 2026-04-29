@@ -24,12 +24,12 @@ public class PocketLedger {
 
             switch (homeChoice){
                 case "D" -> {
-                    FileManager.getWriter();
+                    FileManager.getWriter("positive");
                     break;
                 }
                 case "P" -> {
                     System.out.println("Payment info");
-                    FileManager.getWriter(); // change this so negative number gets added
+                    FileManager.getWriter("negative"); // change this so negative number gets added
                     break;
                 }
                 case "L" -> {
