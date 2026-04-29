@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Transactions {
@@ -93,6 +94,8 @@ public class Transactions {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            transaction.sort(Comparator.comparing(Transactions::getDate).thenComparing(Transactions::getTime).reversed());
 
             return transaction;
     }
