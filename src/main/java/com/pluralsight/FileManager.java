@@ -2,7 +2,6 @@ package com.pluralsight;
 
 import java.io.*;
 
-
 public class FileManager {  // Handles All File Writing and Reading
 
     // File Reader Method
@@ -38,5 +37,16 @@ public class FileManager {  // Handles All File Writing and Reading
             e.printStackTrace();
         }
     }
+    // print header method
+    public static void printHeader(){
+        System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+    }
+    // print statement method
+    public static void printRow(Transactions t){
+        System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
+    }
+
+
+
 }
 

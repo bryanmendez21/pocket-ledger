@@ -25,109 +25,36 @@ public class ReportMenu {
                 case 1 -> {
                     System.out.println("---- view current month ----");
                     reportSearchOptions(reportChoice, "");
-                    // int currentYear = LocalDate.now().getYear();
-                    // int currentMonth = LocalDate.now().getMonthValue();
-                    // int currentDay = LocalDate.now().getDayOfMonth();
-
-                    // System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                    //for (Transactions t : transactions) { // iterate through list
-
-                    // String[] dateSplit = t.getDate().split(Pattern.quote("-"));
-
-                    // int year = Integer.parseInt(dateSplit[0]);
-                    //int month = Integer.parseInt(dateSplit[1]);
-                    //int day = Integer.parseInt(dateSplit[2]);
-
-                    // if (month == currentMonth) {
-                    //      System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
-                    //  }
-                    //}
                     break;
                 }
                 case 2 -> {
                     System.out.println("---- view previous month ----");
                     reportSearchOptions(reportChoice, "");
-                    //  int currentYear = LocalDate.now().getYear();
-                    // int currentMonth = LocalDate.now().getMonthValue();
-                    //  int currentDay = LocalDate.now().getDayOfMonth();
-
-                    //  System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                    // for (Transactions t : transactions) { // iterate through list
-
-                    // String[] dateSplit = t.getDate().split(Pattern.quote("-"));
-
-                    // int year = Integer.parseInt(dateSplit[0]);
-                    // int month = Integer.parseInt(dateSplit[1]);
-                    // int day = Integer.parseInt(dateSplit[2]);
-
-                    // if (month == currentMonth -1 && year == currentYear) {
-                    //   System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
-                    //  }
-                    //  }
                     break;
                 }
                 case 3 -> {
                     System.out.println("---- View Current Year ----");
                     reportSearchOptions(reportChoice, "");
-                    // int currentYear = LocalDate.now().getYear();
-                    // int currentMonth = LocalDate.now().getMonthValue();
-                    //int currentDay = LocalDate.now().getDayOfMonth();
-
-                    //  System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                    // for (Transactions t : transactions) { // iterate through list
-
-                    //  String [] dateSplit = t.getDate().split(Pattern.quote("-"));
-
-                    //  int year = Integer.parseInt(dateSplit[0]);
-                    //  int month = Integer.parseInt(dateSplit[1]);
-                    //  int day = Integer.parseInt(dateSplit[2]);
-
-                    // if (year == currentYear) {
-                    //     System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
-                    //  }
-                    // }
                     break;
                 }
                 case 4 -> {
                     System.out.println("---- View Previous Year ----");
                     reportSearchOptions(reportChoice, "");
-                    // int currentYear = LocalDate.now().getYear();
-                    // int currentMonth = LocalDate.now().getMonthValue();
-                    //int currentDay = LocalDate.now().getDayOfMonth();
-
-                    // System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                    // for (Transactions t : transactions) { // iterate through list
-
-                    // String [] dateSplit = t.getDate().split(Pattern.quote("-"));
-
-                    // int year = Integer.parseInt(dateSplit[0]);
-                    // int month = Integer.parseInt(dateSplit[1]);
-                    // int day = Integer.parseInt(dateSplit[2]);
-
-                    // if (year == currentYear -1) {
-                    //  System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
-                    // }
-                    // }
                     break;
                 }
                 case 5 -> {
-                    System.out.print("Vendor Name: ");
+                    System.out.print(" Search By Vendor Name: ");
                     String vendorName = PocketLedger.userInput.nextLine();
 
                     System.out.println("---- View By Vendor ----");
                     reportSearchOptions(reportChoice, vendorName);
-                    //System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
-                    //for (Transactions t : transactions) { // iterate through list
-                    //   if(t.getVendor().equalsIgnoreCase(vendorName)){
-                    //      System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
-                    //  }
-                    // }
-
                 }
-                case 0 -> {
-                   reportRunning = false;
-
+                case 6 -> {
+                    System.out.println("Custom Search ");
+                    break;
                 }
+                case 0 -> reportRunning = false;
+
                 default -> {
                     System.out.println("Invalid Input");
                     break;
@@ -143,7 +70,8 @@ public class ReportMenu {
         int currentMonth = LocalDate.now().getMonthValue();
         int currentDay = LocalDate.now().getDayOfMonth();
 
-        System.out.println("    DATE   |   TIME   |  VENDOR  |   DESCRIPTION  |  AMOUNT");
+        FileManager.printHeader();
+
         for (Transactions t : Transactions.loadTransaction()) { // iterate through list
 
             String [] dateSplit = t.getDate().split(Pattern.quote("-"));
@@ -153,19 +81,19 @@ public class ReportMenu {
             int day = Integer.parseInt(dateSplit[2]);
 
             if (reportChoice == 1 && month == currentMonth && year == currentYear) { // case 1
-                System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
+                FileManager.printRow(t);
 
             } else if (reportChoice == 2 && month == currentMonth -1 && year == currentYear) { // case 2
-                System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(), t.getTime(), t.getVendor(), t.getDescription(), t.getAmount());
+                FileManager.printRow(t);
 
             } else if (reportChoice == 3 && year == currentYear) { //case 3
-                System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                FileManager.printRow(t);
 
             } else if (reportChoice == 4 && year == currentYear -1) { // case 4
-                System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                FileManager.printRow(t);
 
             } else if (reportChoice == 5 && t.getVendor().equalsIgnoreCase(vendorName)){ // case 5
-                System.out.printf("%s | %s | %s | %s | %.2f\n", t.getDate(),t.getTime(),t.getVendor(),t.getDescription(),t.getAmount());
+                FileManager.printRow(t);
 
             }
         }
