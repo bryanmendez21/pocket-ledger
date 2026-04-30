@@ -80,6 +80,7 @@ public class Transactions {
                 String fileData;
                 tranFile.readLine(); // Skip Header
                 while ((fileData = tranFile.readLine()) != null) {
+                    if (fileData.trim().isEmpty())continue;
                     String[] splitData = fileData.split(Pattern.quote("|"));
                     //split
                     String date = splitData[0];

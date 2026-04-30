@@ -1,7 +1,6 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 
 import static com.pluralsight.InterfaceStyle.*;
@@ -31,23 +30,27 @@ public class LedgerMenu {
                 System.out.println(WALL + RED + BOLD + h + " ".repeat(WIDTH - h.length())+ RESET + WALL);
                 System.out.println(BL + WHITE + BOLD + H.repeat(WIDTH) + BR + RESET); // Bottom Border
 
-                System.out.print("Choose Option Using Letters: ");
+                System.out.print(BOLD +"Choose Option Using Letters: ");
                 String ledgerChoice = PocketLedger.userInput.nextLine();
 
 
                 switch (ledgerChoice) {
                     case "A", "a" -> {
+                        System.out.println(BRIGHT_BLUE + BOLD+"---------- ALL ----------");
                         LedgerChoice("all");
+                        System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                         break;
                     }
                     case "D", "d" -> { // move a,d,p into one method and call based on whats needed
-                        System.out.println("---------- DEPOSITS ----------");
+                        System.out.println(BRIGHT_BLUE + BOLD +"---------- DEPOSITS ----------");
                         LedgerChoice("deposits");
+                        System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                         break;
                     }
                     case "P", "p" -> {
-                        System.out.println("---------- PAYMENTS ----------");
+                        System.out.println(BRIGHT_BLUE + BOLD +"---------- PAYMENTS ----------");
                         LedgerChoice("payments");
+                        System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                         break;
                     }
                     case "R", "r" -> {
@@ -77,7 +80,7 @@ public class LedgerMenu {
             }else if ((filter.equalsIgnoreCase("deposits")) && (t.getAmount() > 0)){
                 FileManager.printRow(t);
 
-            }else if ((filter.equalsIgnoreCase("payments")) && (t.getAmount() < 0)){
+            }else if ((filter.equalsIgnoreCase( "payments")) && (t.getAmount() < 0)){
                 FileManager.printRow(t);
 
             }

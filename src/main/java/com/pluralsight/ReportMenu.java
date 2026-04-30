@@ -37,48 +37,61 @@ public class ReportMenu {
             System.out.println(BL + WHITE + BOLD + H.repeat(WIDTH) + BR + RESET); // Bottom Border
 
 
-            System.out.print("Choose Option Using Letters: ");
+            System.out.print(BOLD +"Choose Option Using Letters: ");
             int reportChoice = PocketLedger.userInput.nextInt();
             PocketLedger.userInput.nextLine();
 
             switch (reportChoice) {
                 case 1 -> {
-                    System.out.println("---- view current month ----");
+                    System.out.println(BRIGHT_BLUE + BOLD + "---- view current month ----");
                     reportSearchOptions(reportChoice, "");
+                    System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 2 -> {
-                    System.out.println("---- view previous month ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- view previous month ----");
                     reportSearchOptions(reportChoice, "");
+                    System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 3 -> {
-                    System.out.println("---- View Current Year ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Current Year ----");
                     reportSearchOptions(reportChoice, "");
+                    System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 4 -> {
-                    System.out.println("---- View Previous Year ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Previous Year ----");
                     reportSearchOptions(reportChoice, "");
+                    System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 5 -> {
-                    System.out.print(" Search By Vendor Name: ");
+                    System.out.print(BOLD +" Search By Vendor Name: ");
                     String vendorName = PocketLedger.userInput.nextLine();
 
-                    System.out.println("---- View By Vendor ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View By Vendor ----");
                     reportSearchOptions(reportChoice, vendorName);
+                    System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                 }
                 case 6 -> {
                     boolean customRunning = true;
                     do {
-                        System.out.println("---- Custom Search ----");
-                        System.out.println("S) Filter by Start/End date");
-                        System.out.println("A) Filter by Amount");
-                        System.out.println("D) Filter by Description");
-                        System.out.println("X) Exit Custom Search");
+                        System.out.println(TL + WHITE + BOLD + H.repeat(WIDTH) + TR + RESET);// Top Border
+                        String ot = "      Custom Search ";
+                        System.out.println(WALL + BRIGHT_BLUE + BOLD + ot + " ".repeat(WIDTH - ot.length()) + WALL);
+                        System.out.println(WHITE + BOLD + ML + H.repeat(WIDTH) + MR + RESET); // Divider
+                        String S = "S) Filter by Start/End date";
+                        System.out.println(WALL + GREEN + BOLD +  S + " ".repeat(WIDTH - S.length()) + RESET + WALL);
+                        String A = "A) Filter by Amount";
+                        System.out.println(WALL + YELLOW + BOLD + A + " ".repeat(WIDTH - A.length()) + RESET + WALL);
+                        String D = "D) Filter by Description";
+                        System.out.println(WALL + CYAN + BOLD + D + " ".repeat(WIDTH - D.length()) + RESET + WALL);
+                        String x = "X) Exit Custom Search";
+                        System.out.println(WALL + RED + BOLD + x + " ".repeat(WIDTH - x.length())+ RESET + WALL);
+                        System.out.println(BL + WHITE + BOLD + H.repeat(WIDTH) + BR + RESET); // Bottom Border
 
-                        System.out.print("Search using: ");
+                        System.out.print(BOLD +"Search using: ");
                         String customChoice = PocketLedger.userInput.nextLine().toUpperCase();
 
                         if(customChoice.equalsIgnoreCase("X")){
@@ -141,27 +154,30 @@ public class ReportMenu {
     public static void customSearch(String customChoice){
         switch(customChoice) {
             case "S" ->{
-                System.out.print("Enter Start date: ");
+                System.out.print(BOLD + "Enter Start date: ");
                 String startDate = PocketLedger.userInput.nextLine();
-                System.out.print("Enter End date: ");
+                System.out.print(BOLD + "Enter End date: ");
                 String endDate = PocketLedger.userInput.nextLine();
 
                 customSearchStartEnd(startDate,endDate);
+                System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                break;
             }
             case "A" -> {
-                System.out.print("Enter Amount: ");
+                System.out.print(BOLD + "Enter Amount: ");
                 double amountSearch = PocketLedger.userInput.nextDouble();
                 PocketLedger.userInput.nextLine();
 
                 customSearchAmount(amountSearch);
+                System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                 break;
             }
             case "D" -> {
-                System.out.print("Enter Description or KeyWords: ");
+                System.out.print(BOLD + "Enter Description or KeyWords: ");
                 String descriptionSearch = PocketLedger.userInput.nextLine().toUpperCase();
 
                 customSearchDescription(descriptionSearch);
+                System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                 break;
             }
             default -> System.out.println("Invalid Input");

@@ -35,6 +35,7 @@ public class InterfaceStyle {
     public static final String WALL = WHITE + BOLD + "║" + RESET;
     // --- BORDER WIDTH ---
     public static final int WIDTH = 40;
+    public static final int OUTPUTWIDTH = 60;
 
     // --- TEST --- add main to test again
     //System.out.println(WHITE + BOLD + TL + H.repeat(WIDTH) + TR + RESET);
