@@ -73,7 +73,7 @@ public class ReportMenu {
                 }
                 case 0 -> reportRunning = false;
 
-                default -> {
+                default -> { //add if statement in case user inputs char or string
                     System.out.println("Invalid Input");
                     break;
                 }
@@ -122,19 +122,26 @@ public class ReportMenu {
     public static void customSearch(String customChoice){
         switch(customChoice) {
             case "S" ->{
-                System.out.println("start end");
+                System.out.println("Enter Start and End date: ");
+                String startEndDate = PocketLedger.userInput.nextLine();
                break;
             }
             case "A" -> {
-                System.out.println("Amount");
+                System.out.println("Enter Amount: ");
+                double amountSearch = PocketLedger.userInput.nextDouble();
+                PocketLedger.userInput.nextLine();
                 break;
             }
             case "D" -> {
-                System.out.println("Description");
+                System.out.println("Enter Description or KeyWords: ");
+                PocketLedger.userInput.nextLine();
+
                 break;
             }
             default -> System.out.println("Invalid Input");
         }
     }
+
+    // Custom Search Key word
 }
 
