@@ -59,7 +59,7 @@ public class ReportMenu {
                         System.out.println("D) Filter by Description");
                         System.out.println("X) Exit Custom Search");
 
-                        System.out.println("Search using: ");
+                        System.out.print("Search using: ");
                         String customChoice = PocketLedger.userInput.nextLine().toUpperCase();
 
                         if(customChoice.equalsIgnoreCase("X")){
@@ -122,26 +122,83 @@ public class ReportMenu {
     public static void customSearch(String customChoice){
         switch(customChoice) {
             case "S" ->{
-                System.out.println("Enter Start and End date: ");
-                String startEndDate = PocketLedger.userInput.nextLine();
+                System.out.print("Enter Start date: ");
+                String startDate = PocketLedger.userInput.nextLine();
+                System.out.print("Enter End date: ");
+                String endDate = PocketLedger.userInput.nextLine();
+
+                customSearchStartEnd(startDate,endDate);
                break;
             }
             case "A" -> {
-                System.out.println("Enter Amount: ");
+                System.out.print("Enter Amount: ");
                 double amountSearch = PocketLedger.userInput.nextDouble();
                 PocketLedger.userInput.nextLine();
+
+                customSearchAmount(amountSearch);
                 break;
             }
             case "D" -> {
-                System.out.println("Enter Description or KeyWords: ");
-                PocketLedger.userInput.nextLine();
+                System.out.print("Enter Description or KeyWords: ");
+                String descriptionSearch = PocketLedger.userInput.nextLine().toUpperCase();
 
+                customSearchDescription(descriptionSearch);
                 break;
             }
             default -> System.out.println("Invalid Input");
         }
     }
 
+    // Custom Search date
+    public static void customSearchStartEnd(String startDate,String endDate){
+        boolean found = false;
+        for (Transactions t : Transactions.loadTransaction()){
+            String date = t.getDate();
+
+            boolean afterStart = startDate.isEmpty() || date.compareTo(startDate) >= 0;
+            boolean beforeEnd = endDate.isEmpty() || date.compareTo(endDate) <= 0;
+
+            if(afterStart && beforeEnd){
+                FileManager.printRow(t);
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("Dates not found");
+
+        }
+
+    }
+
+    // Custom Search Amount
+    public static void customSearchAmount(double amountSearch){
+        boolean found = false;
+        for (Transactions t : Transactions.loadTransaction()){
+            if (t.getAmount() == amountSearch){
+                FileManager.printRow(t);
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("Amount not found");
+        }
+
+    }
+
     // Custom Search Key word
+    public static void customSearchDescription(String descriptionSearch){
+        boolean found = false;
+        for (Transactions t : Transactions.loadTransaction()){
+            if (t.getDescription().toUpperCase().contains(descriptionSearch)){
+                FileManager.printRow(t);
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("Description not found");
+        }
+
+    }
+
 }
 
