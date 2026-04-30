@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import static com.pluralsight.InterfaceStyle.*;
 
@@ -12,13 +13,13 @@ public class PocketLedger {
 
         do {
             System.out.println(TL + WHITE + BOLD + H.repeat(WIDTH) + TR + RESET);// Top Border
-            String t = "        Welcome to Pocket Ledger ";
-            System.out.println(WALL + BOLD + t + " ".repeat(WIDTH - t.length()) + WALL);
+            String t = "       Welcome to Pocket Ledger ";
+            System.out.println(WALL + BRIGHT_BLUE + BOLD + t + " ".repeat(WIDTH - t.length()) + WALL);
             System.out.println(WHITE + BOLD + ML + H.repeat(WIDTH) + MR + RESET); // Divider
             String d = "D) Add Deposit";
-            System.out.println(WALL + CYAN + BOLD +  d + " ".repeat(WIDTH - d.length()) + RESET + WALL);
+            System.out.println(WALL + GREEN + BOLD +  d + " ".repeat(WIDTH - d.length()) + RESET + WALL);
             String p = "P) Make Payment";
-            System.out.println(WALL + CYAN + BOLD + p + " ".repeat(WIDTH - p.length()) + RESET + WALL);
+            System.out.println(WALL + YELLOW + BOLD + p + " ".repeat(WIDTH - p.length()) + RESET + WALL);
             String l = "L) Ledger";
             System.out.println(WALL + CYAN + BOLD + l + " ".repeat(WIDTH - l.length()) + RESET + WALL);
             String x = "X) Exit";

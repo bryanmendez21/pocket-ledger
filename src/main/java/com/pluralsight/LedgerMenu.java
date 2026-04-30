@@ -4,17 +4,33 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
+import static com.pluralsight.InterfaceStyle.*;
+import static com.pluralsight.InterfaceStyle.BR;
+import static com.pluralsight.InterfaceStyle.H;
+import static com.pluralsight.InterfaceStyle.RESET;
+import static com.pluralsight.InterfaceStyle.WIDTH;
+
 public class LedgerMenu {
     public static void ledgerMenu() {
         boolean ledgerRunning = true;
         do {
             try (BufferedReader tranFile = FileManager.getReader()) { // auto closes Reader
-                System.out.println("---------- Ledger Menu ----------");
-                System.out.println("A) Display All");
-                System.out.println("D) Deposits");
-                System.out.println("P) Payments");
-                System.out.println("R) Reports");
-                System.out.println("H) Home");
+                System.out.println(TL + WHITE + BOLD + H.repeat(WIDTH) + TR + RESET);// Top Border
+                String t = "             Ledger Menu";
+                System.out.println(WALL + BRIGHT_BLUE + BOLD + t + " ".repeat(WIDTH - t.length()) + WALL);
+                System.out.println(WHITE + BOLD + ML + H.repeat(WIDTH) + MR + RESET); // Divider
+                String a = "A) Display All";
+                System.out.println(WALL + GREEN + BOLD +  a + " ".repeat(WIDTH - a.length()) + RESET + WALL);
+                String d = "D) Deposits";
+                System.out.println(WALL + YELLOW + BOLD + d + " ".repeat(WIDTH - d.length()) + RESET + WALL);
+                String p = "P) Payments";
+                System.out.println(WALL + CYAN + BOLD + p + " ".repeat(WIDTH - p.length()) + RESET + WALL);
+                String r = "R) Reports";
+                System.out.println(WALL + BLUE + BOLD + r + " ".repeat(WIDTH - r.length())+ RESET + WALL);
+                String h = "H) Home";
+                System.out.println(WALL + RED + BOLD + h + " ".repeat(WIDTH - h.length())+ RESET + WALL);
+                System.out.println(BL + WHITE + BOLD + H.repeat(WIDTH) + BR + RESET); // Bottom Border
+
                 System.out.print("Choose Option Using Letters: ");
                 String ledgerChoice = PocketLedger.userInput.nextLine();
 

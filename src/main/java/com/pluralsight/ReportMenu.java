@@ -3,6 +3,12 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
+import static com.pluralsight.InterfaceStyle.*;
+import static com.pluralsight.InterfaceStyle.BR;
+import static com.pluralsight.InterfaceStyle.H;
+import static com.pluralsight.InterfaceStyle.RESET;
+import static com.pluralsight.InterfaceStyle.WIDTH;
+
 public class ReportMenu {
 
     // Menu Method Report
@@ -10,14 +16,27 @@ public class ReportMenu {
         boolean reportRunning = true;
 
         do {
-            System.out.println("---------- Report Menu ----------");
-            System.out.println("1) Month To Date");
-            System.out.println("2) Previous Month");
-            System.out.println("3) Year To Date");
-            System.out.println("4) Previous Year");
-            System.out.println("5) Search by Vendor");
-            System.out.println("6) Custom Search");
-            System.out.println("0) Back");
+            System.out.println(TL + WHITE + BOLD + H.repeat(WIDTH) + TR + RESET);// Top Border
+            String t = "             Report Menu ";
+            System.out.println(WALL + BRIGHT_BLUE + BOLD + t + " ".repeat(WIDTH - t.length()) + WALL);
+            System.out.println(WHITE + BOLD + ML + H.repeat(WIDTH) + MR + RESET); // Divider
+            String a = "1) Month To Date";
+            System.out.println(WALL + GREEN + BOLD +  a + " ".repeat(WIDTH - a.length()) + RESET + WALL);
+            String b = "2) Previous Month";
+            System.out.println(WALL + YELLOW + BOLD + b + " ".repeat(WIDTH - b.length()) + RESET + WALL);
+            String c = "3) Year To Date";
+            System.out.println(WALL + CYAN + BOLD + c + " ".repeat(WIDTH - c.length()) + RESET + WALL);
+            String d = "4) Previous Year";
+            System.out.println(WALL + BLUE + BOLD + d + " ".repeat(WIDTH - d.length())+ RESET + WALL);
+            String e = "5) Search by Vendor";
+            System.out.println(WALL + MAGENTA + BOLD + e + " ".repeat(WIDTH - e.length())+ RESET + WALL);
+            String f = "6) Custom Search";
+            System.out.println(WALL + BRIGHT_GREEN + BOLD + f + " ".repeat(WIDTH - f.length())+ RESET + WALL);
+            String g = "0) Back";
+            System.out.println(WALL + RED + BOLD + g + " ".repeat(WIDTH - g.length())+ RESET + WALL);
+            System.out.println(BL + WHITE + BOLD + H.repeat(WIDTH) + BR + RESET); // Bottom Border
+
+
             System.out.print("Choose Option Using Letters: ");
             int reportChoice = PocketLedger.userInput.nextInt();
             PocketLedger.userInput.nextLine();
