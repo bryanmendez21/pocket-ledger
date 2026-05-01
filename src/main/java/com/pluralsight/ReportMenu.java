@@ -43,25 +43,25 @@ public class ReportMenu {
 
             switch (reportChoice) {
                 case 1 -> {
-                    System.out.println(BRIGHT_BLUE + BOLD + "---- view current month ----");
+                    System.out.println(BRIGHT_BLUE + BOLD + "---- view current month ----" + RESET);
                     reportSearchOptions(reportChoice, "");
                     System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 2 -> {
-                    System.out.println(BRIGHT_BLUE + BOLD +"---- view previous month ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- view previous month ----"+ RESET);
                     reportSearchOptions(reportChoice, "");
                     System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 3 -> {
-                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Current Year ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Current Year ----"+ RESET);
                     reportSearchOptions(reportChoice, "");
                     System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
                 }
                 case 4 -> {
-                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Previous Year ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View Previous Year ----"+ RESET);
                     reportSearchOptions(reportChoice, "");
                     System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                     break;
@@ -70,7 +70,7 @@ public class ReportMenu {
                     System.out.print(BOLD +" Search By Vendor Name: ");
                     String vendorName = PocketLedger.userInput.nextLine();
 
-                    System.out.println(BRIGHT_BLUE + BOLD +"---- View By Vendor ----");
+                    System.out.println(BRIGHT_BLUE + BOLD +"---- View By Vendor ----"+ RESET);
                     reportSearchOptions(reportChoice, vendorName);
                     System.out.println(WHITE + BOLD + H.repeat(OUTPUTWIDTH) + RESET); // Bottom Border
                 }
@@ -79,7 +79,7 @@ public class ReportMenu {
                     do {
                         System.out.println(TL + WHITE + BOLD + H.repeat(WIDTH) + TR + RESET);// Top Border
                         String ot = "      Custom Search ";
-                        System.out.println(WALL + BRIGHT_BLUE + BOLD + ot + " ".repeat(WIDTH - ot.length()) + WALL);
+                        System.out.println(WALL + BRIGHT_BLUE + BOLD + ot + " ".repeat(WIDTH - ot.length())+ RESET + WALL);
                         System.out.println(WHITE + BOLD + ML + H.repeat(WIDTH) + MR + RESET); // Divider
                         String S = "S) Filter by Start/End date";
                         System.out.println(WALL + GREEN + BOLD +  S + " ".repeat(WIDTH - S.length()) + RESET + WALL);

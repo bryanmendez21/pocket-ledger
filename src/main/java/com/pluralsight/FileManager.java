@@ -21,7 +21,7 @@ public class FileManager {  // Handles All File Writing and Reading
             if (date.trim().isEmpty()){
                 date = LocalDate.now().toString(); //gives today time
             }
-            System.out.print("Enter Time (HH:MM:SS) or press Enter for: ");
+            System.out.print("Enter Time (HH:MM:SS) or press Enter: ");
             String time = PocketLedger.userInput.nextLine();
             if (time.trim().isEmpty()){
                 time = LocalTime.now().withNano(0).toString(); // gives time enter is pressed without nanoseconds
